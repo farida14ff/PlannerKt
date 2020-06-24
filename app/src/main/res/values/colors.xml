@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimaryDark">#EFE9E9</color>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorAccent">#000000</color>
+    <color name="colorPrimaryBackgroundLight">#1A237E</color>
+
+
+    <color name="colorWhite">#ffffff</color>
+    <color name="blackTextColor">#000000</color>
+
+    <color name="note">#e7dfdf</color>
+
+    <color name="rippleColor">#9e9be2</color>
+    <color name="loginPageBackgroundColor">#FFFFFF</color>
+
+    <!--    <color name="rippleColor">#420D91</color>-->
+    <color name="textColorPrimary">#928C8C</color>
+</resources>

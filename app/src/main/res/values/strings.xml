@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Your Planner</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="delete">Удалить</string>
+    <string name="logo_content_description">Your Planner logo</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Пароль</string>
+    <string name="button_next">Войти</string>
+    <string name="button_register">Зарегистрироваться</string>
+    <string name="error_password">Пароль должен содержать не менее 8 символов</string>
+    <string name="login_error">Неправильный логин или пароль</string>
+    <string name="hint_repeat_password">Повторите пароль</string>
+</resources>
