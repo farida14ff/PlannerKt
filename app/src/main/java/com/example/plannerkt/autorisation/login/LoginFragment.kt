@@ -30,7 +30,6 @@ class LoginFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
     var sharedPreferences: SharedPreferences? = null
     var editor: Editor? = null
-    var authToken: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -61,7 +60,6 @@ class LoginFragment : Fragment() {
                 view.password_edit_text.error = getString(R.string.error_password)
 
             } else {
-
                 view.password_edit_text.error = null
                 val user = Firebase.auth.currentUser
                 
@@ -83,7 +81,6 @@ class LoginFragment : Fragment() {
             }
         }
 
-        // Clear the error once more than 8 characters are typed.
         view.password_edit_text.setOnKeyListener { _, _, _ ->
             if (isPasswordValid(password_edit_text.text)) {
                 password_text_input.error = null //Clear the error
@@ -91,12 +88,6 @@ class LoginFragment : Fragment() {
             false
         }
 
-//        val loginBtn = view.findViewById<Button>(R.id.login)
-//        loginBtn.setOnClickListener {
-//
-//        }
-
-//        val registrationTV = view.findViewById<TextView>(R.id.registration)
         view.cancel_button.setOnClickListener {
             val registrationFragment: Fragment = RegistrationFragment()
             fragmentManager!!.beginTransaction()

@@ -1,6 +1,8 @@
 package com.example.plannerkt.notes
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -31,8 +33,8 @@ class NotesFragment : Fragment() {
 
     lateinit var adapter: NotesAdapter
     var deleteNoteBtn: LinearLayout? = null
-    private var def_val: Int = 0
-
+    var sharedPreferences: SharedPreferences? = null
+    var editor: SharedPreferences.Editor? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,7 +43,17 @@ class NotesFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_notes, container, false)
         setHasOptionsMenu(true);
         initViews(view)
+        initSharedPref()
         return view
+    }
+
+    @SuppressLint("CommitPrefEdits")
+    private fun initSharedPref() {
+        sharedPreferences = activity?.getSharedPreferences(
+            "myPreferences",
+            Context.MODE_PRIVATE
+        )
+        editor = sharedPreferences?.edit()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -69,10 +81,11 @@ class NotesFragment : Fragment() {
 
         val addNoteBtn = view.findViewById<FloatingActionButton>(R.id.add_note_btn)
         addNoteBtn.setOnClickListener {
-            Toast.makeText(context, "Clicked", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(context, "Clicked", Toast.LENGTH_SHORT).show()
 
-            val addNoteFragment: Fragment =
-                AddNoteFragment()
+            editor?.putBoolean("editableStatus",false)?.commit()
+
+            val addNoteFragment: Fragment = AddNoteFragment()
             fragmentManager!!.beginTransaction()
                 .replace(R.id.main_container, addNoteFragment)
                 .addToBackStack(null)
@@ -87,6 +100,17 @@ class NotesFragment : Fragment() {
             OnItemClickListener {
             override fun onItemClick(note: Note?) {
 //                Toast.makeText(context, "Clicked", Toast.LENGTH_SHORT).show()
+                editor?.putBoolean("editableStatus",true)?.commit()
+
+                val addNoteFragment: Fragment = AddNoteFragment()
+                fragmentManager!!.beginTransaction()
+                    .replace(R.id.main_container, addNoteFragment)
+                    .addToBackStack(null)
+                    .commit()
+
+//                notesViewModel?.updateNote(
+//                    notesViewModel?.getNoteById(note.id)
+//                )
 
             }
 

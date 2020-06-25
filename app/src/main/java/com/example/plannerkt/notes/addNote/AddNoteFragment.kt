@@ -1,6 +1,8 @@
 package com.example.plannerkt.notes.addNote
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
 import android.text.Editable
@@ -24,30 +26,33 @@ import kotlinx.android.synthetic.main.fragment_add_note.*
 class AddNoteFragment : Fragment() {
 
     private var notesViewModel: NotesViewModel? = null
+    private var sharedPreferences: SharedPreferences? = null
+    var editableStatus: Boolean = false
 
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+        savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_add_note, container, false)
+
+        sharedPreferences = context
+            ?.getSharedPreferences("myPreferences", Context.MODE_PRIVATE)
+
+
+        editableStatus = sharedPreferences!!.getBoolean("editableStatus",false)
+
         initViews(view)
-        initList(view)
         return view
     }
 
-    private fun initList(view: View?) {
-
-
-    }
 
     @SuppressLint("SetTextI18n")
     @RequiresApi(Build.VERSION_CODES.O)
     private fun initViews(view: View?) {
-        notesViewModel = ViewModelProviders.of(this).get(NotesViewModel::class.java)
 
-//        notesViewModel?.getNotes()?.observe(this, Observer<List<Note>> { this.renderMessges(it) })
+
+        notesViewModel = ViewModelProviders.of(this).get(NotesViewModel::class.java)
 
         val noteEditText = view?.findViewById<EditText>(R.id.note_edit_text)
         noteEditText?.requestFocus()
@@ -77,19 +82,17 @@ class AddNoteFragment : Fragment() {
 
             override fun afterTextChanged(editable: Editable) {}
         })
-//        noteEditText?.filters =
-//            arrayOf<InputFilter>(InputFilter.LengthFilter(DEFAULT_MSG_LENGTH_LIMIT))
 
         val goBackBtn = view!!.findViewById<ImageView>(R.id.go_back_icon)
         goBackBtn.setOnClickListener {
             if(noteEditText?.text != null && noteEditText.text?.trim()?.length!! > 0){
                 val note = Note(0, "", noteEditText.text.toString())
-                notesViewModel?.setNotes(note)
+                if (editableStatus)
+                    notesViewModel?.setNotes(note)
+                else
+                    notesViewModel?.updateNote(note)
             }
 
-//            noteEditText?.text?.isNotEmpty().let {
-
-//            }
             fragmentManager!!.popBackStack()
 
         }
@@ -106,9 +109,12 @@ class AddNoteFragment : Fragment() {
         val doneBtn = view.findViewById<LinearLayout>(R.id.note_ready_LL)
         doneBtn.setOnClickListener {
             if(noteEditText?.text != null && noteEditText.text?.trim()?.length!! > 0) {
-
                 val note = Note(0, "", noteEditText.text.toString())
-                notesViewModel?.setNotes(note)
+
+                if (editableStatus)
+                    notesViewModel?.setNotes(note)
+                else
+                    notesViewModel?.updateNote(note)
             }
             fragmentManager!!.popBackStack()
 

@@ -41,6 +41,8 @@ class NotesRepository (application: Application) : CoroutineScope {
 
     fun getNoteById(id: Int) = notesDao?.getNoteById(id)
 
+    fun updateNote(note: Note) = notesDao?.updateNote(note)
+
     fun setNotes(note: Note) {
         launch  { setNoteBG(note) }
     }

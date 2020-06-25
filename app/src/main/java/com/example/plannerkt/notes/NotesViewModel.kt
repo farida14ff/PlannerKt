@@ -12,6 +12,8 @@ class NotesViewModel(application: Application) : AndroidViewModel(application) {
 
     fun getNoteById(id: Int) = repository.getNoteById(id)
 
+    fun updateNote(note: Note) = repository.updateNote(note)
+
     fun setNotes(notes: Note) { repository.setNotes(notes)}
 
 

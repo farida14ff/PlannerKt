@@ -10,6 +10,9 @@ interface NotesDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun setNotes(note: Note)
 
+    @Update
+    fun updateNote(note: Note)
+
 
     @Query("SELECT * FROM notes WHERE id = :id")
     fun getNoteById(id: Int) : Note

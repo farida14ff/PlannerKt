@@ -23,13 +23,14 @@
             android:layout_height="?attr/actionBarSize"
             android:addStatesFromChildren="false"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:titleTextAppearance="@style/ToolbarTheme"
             app:layout_constraintEnd_toStartOf="@+id/note_ready_LL"
             app:layout_constraintHorizontal_bias="0.039"
             app:layout_constraintStart_toEndOf="@+id/go_back_icon"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0"
             app:title="Заметки"
-            app:titleTextColor="@color/colorAccent">
+            tools:ignore="UnknownIdInLayout">
 
         </androidx.appcompat.widget.Toolbar>
 
