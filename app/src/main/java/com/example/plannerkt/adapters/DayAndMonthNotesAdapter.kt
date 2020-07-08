@@ -10,39 +10,32 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.plannerkt.R
 import com.example.plannerkt.listeners.OnItemClickListener
 import com.example.plannerkt.listeners.OnItemLongClickListener
-import com.example.plannerkt.models.FastNote
 import com.example.plannerkt.models.Note
 import kotlinx.android.synthetic.main.item_notes.view.*
 import java.util.*
-import kotlin.collections.ArrayList
 
-
-class NotesAdapter(
-    private val items: ArrayList<FastNote>?,
+class DayAndMonthNotesAdapter(
+    private val items: List<Note>?,
     private val onItemClickListener: OnItemClickListener,
     private val onItemLongClickListener: OnItemLongClickListener
-) : RecyclerView.Adapter<NotesAdapter.NotesViewHolder>() {
-
+): RecyclerView.Adapter<DayAndMonthNotesAdapter.DayAndMonthNotesViewHolder>() {
 
     private var lastChecked: CheckBox? = null
     private var lastCheckedPos = 0
-    var itemsToDelete: ArrayList<FastNote> = ArrayList()
+    var itemsToDelete: ArrayList<Note> = ArrayList()
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotesViewHolder {
-        return NotesViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DayAndMonthNotesViewHolder {
+        return DayAndMonthNotesViewHolder(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_notes, parent, false)
-        )
+                .inflate(R.layout.item_day_and_month_note,parent,false))
     }
-
-
 
     override fun getItemCount(): Int {
         return items?.size!!
     }
 
-    override fun onBindViewHolder(holder: NotesViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: DayAndMonthNotesViewHolder, position: Int) {
         holder.bind(items!![position], onItemClickListener, onItemLongClickListener)
         holder.checkBox.isChecked = items[position].isSelected
         holder.checkBox.tag = position
@@ -68,21 +61,19 @@ class NotesAdapter(
 
             }
             items[clickedPos].isSelected = cb.isChecked
-            Log.e("setNotesToDelete",Arrays.toString(itemsToDelete.toArray()))
+            Log.e("setNotesToDelete", Arrays.toString(itemsToDelete.toArray()))
 
         }
-
     }
 
-
-    inner class NotesViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    inner class DayAndMonthNotesViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         private val note_body = view.notes_body
         val checkBox = view.checker
 
         @SuppressLint("LongLogTag", "UseValueOf")
         fun bind(
-            note: FastNote,
+            note: Note,
             onItemClickListener: OnItemClickListener,
             onItemLongClickListener: OnItemLongClickListener
         ) {
@@ -92,11 +83,9 @@ class NotesAdapter(
 
 
             }
-            note_body.text = note.text
+            note_body.text = note.body
 
 
         }
-
     }
 }
-

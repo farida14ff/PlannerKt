@@ -10,18 +10,24 @@ interface NotesDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun setNotes(note: Note)
 
-    @Update
-    fun updateNote(note: Note)
+//    @Update
+//    fun updateNote(note: Note)
+
+    @Query("UPDATE notes SET body = :body WHERE id = :id")
+    fun updateNote(body: String, id: Int)
 
 
     @Query("SELECT * FROM notes WHERE id = :id")
-    fun getNoteById(id: Int) : Note
+    fun getNoteById(id: Int): Note?
+
 
     @Query("SELECT * from notes ORDER BY id ASC")
     fun getNotes() : LiveData<List<Note>>
 
+
     @Query("DELETE FROM notes WHERE id = :id")
     fun deleteItem(id: Int)
+
 
     @Delete
     fun deleteAllItems(note: List<Note?>?)

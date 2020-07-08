@@ -13,6 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.plannerkt.MainActivity
 import com.example.plannerkt.R
@@ -54,6 +55,9 @@ class LoginFragment : Fragment() {
     private fun initViews(view: View) {
         auth = Firebase.auth
 
+        view.next_button.backgroundTintList =
+            ContextCompat.getColorStateList(activity!!.applicationContext, R.color.colorMain);
+
         view.next_button.setOnClickListener {
 
             if (!isPasswordValid(view.password_edit_text.text)) {
@@ -62,18 +66,18 @@ class LoginFragment : Fragment() {
             } else {
                 view.password_edit_text.error = null
                 val user = Firebase.auth.currentUser
-                
+
                 if (user != null) {
                     startActivity(Intent(context, MainActivity::class.java))
                     activity?.finish()
-                    editor?.putBoolean("login",true)?.commit()
+                    editor?.putBoolean("login", true)?.commit()
 
-                    Log.e("login user","Successful")
+                    Log.e("login user", "Successful")
 
                 } else {
-                    editor?.putBoolean("login",false)?.commit()
+                    editor?.putBoolean("login", false)?.commit()
                     view.password_text_input.error = getString(R.string.login_error)
-                    Log.e("login user","failure")
+                    Log.e("login user", "failure")
 
 
                 }

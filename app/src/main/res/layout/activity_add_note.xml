@@ -40,7 +40,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/go_back_icon"
                 app:layout_constraintTop_toTopOf="parent"
-                app:title="Добавить заметку"
+                app:title="@string/add_note_title"
                 app:titleTextColor="@color/colorAccent">
 
             </androidx.appcompat.widget.Toolbar>

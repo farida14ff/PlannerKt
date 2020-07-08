@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_orders"
+        android:icon="@drawable/ic_notes"
+        android:title="@string/title_notes" />
+
+    <item
+        android:id="@+id/navigation_chat"
+        android:enabled="true"
+        android:icon="@drawable/ic_sots"
+        android:title="@string/title_sots" />
+
+<!--    <item-->
+<!--        android:id="@+id/navigation_person_area"-->
+<!--        android:enabled="true"-->
+<!--        android:icon="@drawable/ic_account_circle"-->
+<!--        android:title="@string/title_sots" />-->
+
+
+</menu>

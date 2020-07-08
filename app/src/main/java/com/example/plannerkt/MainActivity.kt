@@ -5,17 +5,22 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.example.plannerkt.autorisation.AutorisationActivity
+import com.example.plannerkt.section_chat.ChatSectionFragment
 import com.example.plannerkt.listeners.NavigationHost
-import com.example.plannerkt.notes.NotesFragment
+import com.example.plannerkt.section_notes.NotesSectionFragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), NavigationHost {
 
     private val fragmentManager: FragmentManager = supportFragmentManager
-    private val notesFragment: NotesFragment = NotesFragment()
+    private val notesSectionFragment: NotesSectionFragment = NotesSectionFragment()
+    private val chatSectionFragment: ChatSectionFragment = ChatSectionFragment()
     private var sharedPreferences: SharedPreferences? = null
     var authToken: Boolean = false
 
@@ -38,11 +43,34 @@ class MainActivity : AppCompatActivity(), NavigationHost {
         }
 
 
-        fragmentManager.beginTransaction()
-            .add(R.id.main_container,notesFragment)
-            .commit()
+//        fragmentManager.beginTransaction()
+//            .add(R.id.main_container,notesSectionFragment)
+//            .commit()
+
+        nav_view.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
+        if (savedInstanceState == null) {
+            fragmentManager.beginTransaction()
+                .add(R.id.main_container, notesSectionFragment, "1").commit()
+        }
 
     }
+
+    private val onNavigationItemSelectedListener =
+        BottomNavigationView.OnNavigationItemSelectedListener { item: MenuItem ->
+            when (item.itemId) {
+                R.id.navigation_orders -> {
+                    fragmentManager.beginTransaction()
+                        .replace(R.id.main_container,notesSectionFragment).commit()
+                    return@OnNavigationItemSelectedListener true
+                }
+                R.id.navigation_chat -> {
+                    fragmentManager.beginTransaction()
+                        .replace(R.id.main_container, chatSectionFragment, "2").commit()
+                    return@OnNavigationItemSelectedListener true
+                }
+            }
+            false
+        }
 
     override fun navigateTo(fragment: Fragment, addToBackstack: Boolean) {
         val transaction = supportFragmentManager

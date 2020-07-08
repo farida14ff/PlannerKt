@@ -12,6 +12,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.plannerkt.MainActivity
 import com.example.plannerkt.R
@@ -57,6 +58,9 @@ class RegistrationFragment: Fragment() {
     private fun initViews(view: View) {
         auth = Firebase.auth
         var finalPass = " "
+
+        view.next_button.backgroundTintList =
+            ContextCompat.getColorStateList(activity!!.applicationContext, R.color.colorMain);
 
         view.cancel_button.setOnClickListener {
 
