@@ -1,4 +1,4 @@
-package com.example.plannerkt.section_notes.addNote
+package com.example.plannerkt.section_notes.monthNotes.addMonthNote
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -14,27 +14,18 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.annotation.RequiresApi
-import androidx.lifecycle.ViewModelProviders
 import com.example.plannerkt.R
-import com.example.plannerkt.models.Note
-import com.example.plannerkt.section_notes.fastNotes.NotesViewModel
 import com.google.firebase.firestore.FieldValue
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_add_note.*
-import java.util.HashMap
 
-class AddNoteActivity : AppCompatActivity() {
+class AddMonthNoteActivity : AppCompatActivity() {
 
-
-//    private var notesViewModel: NotesViewModel? = null
     private var sharedPreferences: SharedPreferences? = null
     var editableStatus: Boolean = false
     var notesId: Int = 0
     val db = Firebase.firestore
-
-
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,17 +40,9 @@ class AddNoteActivity : AppCompatActivity() {
     }
 
 
-
-
-
     @SuppressLint("SetTextI18n")
     @RequiresApi(Build.VERSION_CODES.O)
     private fun initViews() {
-
-
-//        notesViewModel = ViewModelProviders.of(this).get(NotesViewModel::class.java)
-
-
         val noteEditText = findViewById<EditText>(R.id.note_edit_text)
         noteEditText.requestFocus()
         noteEditText.addTextChangedListener(object : TextWatcher {
@@ -89,22 +72,17 @@ class AddNoteActivity : AppCompatActivity() {
             override fun afterTextChanged(editable: Editable) {}
         })
 
-//        val note: Note = db.toBasketDao().getItem(b.getMealId())
 
 
         if (editableStatus) {
-//            val note: Note? = notesViewModel?.getNoteById(notesId)
-//            noteEditText?.setText(note?.body.toString())
+
         }
 
         val goBackBtn = findViewById<ImageView>(R.id.go_back_icon)
         goBackBtn.setOnClickListener {
             if(noteEditText?.text != null && noteEditText.text?.trim()?.length!! > 0){
-//                val note = Note(0, "", noteEditText.text.toString())
                 if (!editableStatus) {
-//                    notesViewModel?.setNotes(note)
-//                    notesViewModel?.setFbNotes(noteEditText.text.toString())
-                    setfbNote(noteEditText.text.toString())
+                    setFbNote(noteEditText.text.toString())
                     Log.e("editableStatus addnote", "false")
 
                 }
@@ -126,10 +104,7 @@ class AddNoteActivity : AppCompatActivity() {
 //                val note = Note(0, "", noteEditText.text.toString())
 
                 if (!editableStatus) {
-//                    notesViewModel?.setNotes(note)
-//                    notesViewModel?.setFbNotes(noteEditText.text.toString())
-                    setfbNote(noteEditText.text.toString())
-
+                    setFbNote(noteEditText.text.toString())
                     Log.e("editableStatus addnote", "false")
 
                 }
@@ -148,16 +123,17 @@ class AddNoteActivity : AppCompatActivity() {
 
     }
 
-    fun setfbNote(text: String){
+    private fun setFbNote(text: String){
 
         val fastNote = hashMapOf(
-            "text" to text
+            "text" to text,
+            "sentAt" to FieldValue.serverTimestamp()
+
 //            "last" to "Lovelace",
 //            "born" to 1815
         )
 
-// Add a new document with a generated ID
-        db.collection("fastNotes")
+        db.collection(COLLECTION_NAME)
             .add(fastNote)
             .addOnSuccessListener { documentReference ->
                 Log.d("ANA", "DocumentSnapshot added with ID: ${documentReference.id}")
@@ -166,21 +142,11 @@ class AddNoteActivity : AppCompatActivity() {
                 Log.w("ANA", "Error adding document", e)
             }
 
-//        val map: MutableMap<String, Any> = HashMap()
-////            map["sentAt"] = FieldValue.serverTimestamp()//timestamp.now
-//        map["text"] = text
-////        map["uid"] = String.valueOf(fbUserId)
-//        FirebaseFirestore.getInstance().collection("fastNotes").add(map)
         Log.e("setFbNoteBG","set")
 
     }
 
-
-
     companion object {
-        const val EXTRA_REPLY = "com.example.android.wordlistsql.REPLY"
+        const val COLLECTION_NAME = "monthNotes"
     }
-
-
-
 }

@@ -11,14 +11,13 @@ import com.example.plannerkt.R
 import com.example.plannerkt.listeners.OnItemClickListener
 import com.example.plannerkt.listeners.OnItemLongClickListener
 import com.example.plannerkt.models.FastNote
-import com.example.plannerkt.models.Note
 import kotlinx.android.synthetic.main.item_notes.view.*
 import java.util.*
 import kotlin.collections.ArrayList
 
 
 class NotesAdapter(
-    private val items: ArrayList<FastNote>?,
+    private val items: List<FastNote>?,
     private val onItemClickListener: OnItemClickListener,
     private val onItemLongClickListener: OnItemLongClickListener
 ) : RecyclerView.Adapter<NotesAdapter.NotesViewHolder>() {
@@ -82,17 +81,17 @@ class NotesAdapter(
 
         @SuppressLint("LongLogTag", "UseValueOf")
         fun bind(
-            note: FastNote,
+            fastNote: FastNote,
             onItemClickListener: OnItemClickListener,
             onItemLongClickListener: OnItemLongClickListener
         ) {
 
             itemView.setOnClickListener {
-                onItemClickListener.onItemClick(note)
+                onItemClickListener.onItemClick(fastNote)
 
 
             }
-            note_body.text = note.text
+            note_body.text = fastNote.body
 
 
         }

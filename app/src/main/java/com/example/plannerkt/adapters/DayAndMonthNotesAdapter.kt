@@ -13,9 +13,10 @@ import com.example.plannerkt.listeners.OnItemLongClickListener
 import com.example.plannerkt.models.Note
 import kotlinx.android.synthetic.main.item_notes.view.*
 import java.util.*
+import kotlin.collections.ArrayList
 
 class DayAndMonthNotesAdapter(
-    private val items: List<Note>?,
+    private val items: ArrayList<Note>?,
     private val onItemClickListener: OnItemClickListener,
     private val onItemLongClickListener: OnItemLongClickListener
 ): RecyclerView.Adapter<DayAndMonthNotesAdapter.DayAndMonthNotesViewHolder>() {
@@ -83,7 +84,7 @@ class DayAndMonthNotesAdapter(
 
 
             }
-            note_body.text = note.body
+            note_body.text = note.text
 
 
         }

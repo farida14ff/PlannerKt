@@ -17,8 +17,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:targetApi="n">
-        <activity android:name=".BaseActivity"></activity>
-        <activity android:name=".section_notes.addNote.AddNoteActivity" />
+        <activity android:name=".section_notes.monthNotes.addMonthNote.AddMonthNoteActivity"></activity>
+        <activity android:name=".section_notes.fastNotes.addNote.AddNoteActivity" />
+        <activity android:name=".BaseActivity" />
+        <activity android:name=".section_notes.daysNotes.addDayNote.AddDayNoteActivity" />
         <activity android:name=".autorisation.AutorisationActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

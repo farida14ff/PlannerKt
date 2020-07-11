@@ -1,13 +1,22 @@
 package com.example.plannerkt.models
 
-import java.io.Serializable
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
-
+@Entity(tableName = "notes")
 data class FastNote(
-    val text: String
-): Serializable {
-    constructor() : this("")
 
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id")
+    val id: Int,
+
+    @ColumnInfo(name = "title")
+    val title: String,
+
+    @ColumnInfo(name = "body")
+    val body: String
+) {
     var isSelected: Boolean = false
 
 }

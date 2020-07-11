@@ -4,10 +4,10 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.plannerkt.models.Note
+import com.example.plannerkt.models.FastNote
 
 
-@Database(entities = [Note::class], version = 4, exportSchema = false)
+@Database(entities = [FastNote::class], version = 4, exportSchema = false)
 abstract class NotesDatabase : RoomDatabase() {
     abstract fun notesDao(): NotesDao
 

@@ -7,42 +7,32 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import androidx.lifecycle.Observer
 import android.widget.LinearLayout
-import androidx.constraintlayout.widget.Constraints.TAG
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.plannerkt.BuildConfig
 import com.example.plannerkt.R
 import com.example.plannerkt.adapters.NotesAdapter
 import com.example.plannerkt.listeners.OnItemClickListener
 import com.example.plannerkt.listeners.OnItemLongClickListener
 import com.example.plannerkt.models.FastNote
-import com.example.plannerkt.models.Note
-import com.example.plannerkt.section_notes.addNote.AddNoteActivity
+import com.example.plannerkt.section_notes.fastNotes.addNote.AddNoteActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.firebase.firestore.DocumentChange
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.FirebaseFirestoreException
-import com.google.firebase.firestore.QuerySnapshot
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
-import kotlinx.android.synthetic.main.fragment_notes.*
 import kotlinx.android.synthetic.main.fragment_notes.view.*
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class FastNotesFragment : Fragment() {
 
     private var notesViewModel: NotesViewModel? = null
-    private val fastNoteList= ArrayList<FastNote>()
+    private val noteList= ArrayList<FastNote>()
     lateinit var adapter: NotesAdapter
     var deleteNoteBtn: LinearLayout? = null
     var sharedPreferences: SharedPreferences? = null
     var editor: SharedPreferences.Editor? = null
-
-
-    val db = Firebase.firestore
+//    private val db = Firebase.firestore
 
 
     override fun onCreateView(
@@ -54,8 +44,7 @@ class FastNotesFragment : Fragment() {
         setHasOptionsMenu(true);
         initViews(view)
         initSharedPref()
-        initList(view)
-        getFbNotes()
+//        getFbNotes()
         return view
     }
 
@@ -77,65 +66,30 @@ class FastNotesFragment : Fragment() {
     private fun initViews(view: View) {
 
         notesViewModel = ViewModelProviders.of(this).get(NotesViewModel::class.java)
-//        notesViewModel?.getNotes()?.observe(this, Observer<List<Note>> { this.initList(it) })
+        notesViewModel?.getNotes()?.observe(this, Observer<List<FastNote>> { this.initList(it,view)})
 
         deleteNoteBtn = view.findViewById(R.id.more)
 
-//        deleteNoteBtn?.setOnClickListener{
-//            notesViewModel?.deleteAllItems(this.adapter.itemsToDelete)
-//            Log.e("setNotesToDelete NF", Arrays.toString(this.adapter.itemsToDelete.toArray()))
-//
-//        }
+        deleteNoteBtn?.setOnClickListener{
+            notesViewModel?.deleteAllItems(this.adapter.itemsToDelete)
+            Log.e("setNotesToDelete NF", Arrays.toString(this.adapter.itemsToDelete.toArray()))
+        }
 
         val addNoteBtn = view.findViewById<FloatingActionButton>(R.id.add_note_btn)
         addNoteBtn.setOnClickListener {
             editor?.putBoolean("editableStatus",false)?.commit()
-            startActivity(Intent(context,AddNoteActivity::class.java))
+            startActivity(Intent(context,
+                AddNoteActivity::class.java))
 
         }
     }
 
     private fun getFbNotes() {
 
-        db.collection("fastNotes")
-            .addSnapshotListener { snapshots: QuerySnapshot?, _: FirebaseFirestoreException? ->
-                try {
-
-                    for (change in snapshots!!.documentChanges) {
-                        when (change.type) {
-                            DocumentChange.Type.ADDED -> {
-                                val fastNote: FastNote =
-                                    change.document.toObject(FastNote::class.java)
-                                fastNoteList.add(0, fastNote)
-
-                            }
-                            DocumentChange.Type.REMOVED -> {
-                            }
-                            DocumentChange.Type.MODIFIED -> {
-                            }
-                        }
-                    }
-                } catch (ex: NullPointerException) {
-                    Log.e("npExp", "getFbNotes")
-                }
-                adapter.notifyDataSetChanged()
-
-//            .addOnSuccessListener { result ->
-//                for (document in result) {
-//                    Log.d("FNF", "${document.id} => ${document.data}")
-//                }
-//            }
-//            .addOnFailureListener { exception ->
-//                Log.w("FNF", "Error getting documents.", exception)
-//            }
-
-//        //.orderBy("sentAt")
-//        FirebaseFirestore.getInstance().collection("fastNotes")
+//        db.collection("fastNotes")
 //            .addSnapshotListener { snapshots: QuerySnapshot?, _: FirebaseFirestoreException? ->
 //                try {
-////                    if (BuildConfig.DEBUG && snapshots == null) {
-////                        error("Assertion failed")
-////                    }
+//
 //                    for (change in snapshots!!.documentChanges) {
 //                        when (change.type) {
 //                            DocumentChange.Type.ADDED -> {
@@ -151,16 +105,18 @@ class FastNotesFragment : Fragment() {
 //                        }
 //                    }
 //                } catch (ex: NullPointerException) {
-//                    Log.e("npExp","getFbNotes")
+//                    Log.e("npExp", "getFbNotes")
 //                }
 //                adapter.notifyDataSetChanged()
+//
+//
 //            }
-            }
     }
 
 
-    private fun initList(view: View) {
-        adapter = NotesAdapter(fastNoteList, object :
+    private fun initList(fastNoteList:List<FastNote>, view: View) {
+
+        adapter = NotesAdapter(fastNoteList.asReversed(), object :
             OnItemClickListener {
             override fun <T> onItemClick(listItem: T) {
                 editor?.putBoolean("editableStatus",true)?.commit()
@@ -168,13 +124,14 @@ class FastNotesFragment : Fragment() {
 //                    editor?.putInt("notesId",fastNote.id)?.commit()
                 }
 
-                startActivity(Intent(context,AddNoteActivity::class.java))
+                startActivity(Intent(context,
+                    AddNoteActivity::class.java))
 
             }
 
         },
             object : OnItemLongClickListener {
-                override fun onItemLongClick(note: Note?) {
+                override fun <T> onItemLongClick(listItem: T) {
 //                    more.visibility = View.VISIBLE
 
                 }
@@ -188,15 +145,6 @@ class FastNotesFragment : Fragment() {
         view.recycler_notes.adapter = adapter
 
     }
-
-
-
-
-
-//
-//    fun deleteFromDB(note: Note) {
-//        notesViewModel?.deleteItem(note.id)
-//    }
 
 
 }

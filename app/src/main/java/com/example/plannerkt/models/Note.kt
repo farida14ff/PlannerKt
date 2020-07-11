@@ -1,22 +1,18 @@
 package com.example.plannerkt.models
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import com.google.firebase.firestore.ServerTimestamp
+import java.io.Serializable
+import java.util.*
 
-@Entity(tableName = "notes")
-data class Note(
 
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id")
-    val id: Int,
+class Note() : Serializable {
+    val text: String = ""
 
-    @ColumnInfo(name = "title")
-    val title: String,
+    @ServerTimestamp
+    private val sentAt: Date? = null
 
-    @ColumnInfo(name = "body")
-    val body: String
-) {
+
     var isSelected: Boolean = false
+
 
 }

@@ -28,16 +28,16 @@
         android:strokeColor="#000000"/>
     <path
         android:pathData="M213.649,135.959m-53.412,0a53.412,53.412 0,1 1,106.825 0a53.412,53.412 0,1 1,-106.825 0"
-        android:fillColor="#B72828"/>
+        android:fillColor="#1565C0"/>
     <path
         android:pathData="M213.649,135.959m-48.557,0a48.557,48.557 0,1 1,97.113 0a48.557,48.557 0,1 1,-97.113 0"
-        android:fillColor="#FF2E00"/>
+        android:fillColor="#1565C0"/>
     <path
         android:pathData="M215.083,142.34m-62.709,0a62.709,62.709 0,1 1,125.418 0a62.709,62.709 0,1 1,-125.418 0"
         android:fillColor="#ffffff"/>
     <path
         android:pathData="M215.083,142.34m-59.842,0a59.842,59.842 0,1 1,119.685 0a59.842,59.842 0,1 1,-119.685 0"
-        android:fillColor="#FF0000"/>
+        android:fillColor="#1565C0"/>
     <path
         android:pathData="M219.025,140.549h65.934v59.484h-65.934z"
         android:fillColor="#ffffff"/>

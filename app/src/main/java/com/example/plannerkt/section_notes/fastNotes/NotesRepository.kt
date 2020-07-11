@@ -2,16 +2,10 @@ package com.example.plannerkt.section_notes.fastNotes
 
 import android.app.Application
 import android.util.Log
-import android.view.View
-import com.example.plannerkt.BuildConfig
 import com.example.plannerkt.data.NotesDao
 import com.example.plannerkt.data.NotesDatabase
 import com.example.plannerkt.models.FastNote
-import com.example.plannerkt.models.Note
-import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.FirebaseFirestoreException
-import com.google.firebase.firestore.QuerySnapshot
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -35,13 +29,13 @@ class NotesRepository (application: Application) : CoroutineScope {
     fun deleteItem(id: Int) = notesDao?.deleteItem(id)
 
 
-    fun deleteAllItems(note: List<Note?>?){
-        launch { deleteAllItemsBG(note) }
+    fun deleteAllItems(fastNote: List<FastNote?>?){
+        launch { deleteAllItemsBG(fastNote) }
     }
 
-    private suspend fun deleteAllItemsBG(note:List<Note?>?){
+    private suspend fun deleteAllItemsBG(fastNote:List<FastNote?>?){
         withContext(Dispatchers.IO){
-            notesDao?.deleteAllItems(note)
+            notesDao?.deleteAllItems(fastNote)
         }
     }
 
@@ -86,13 +80,13 @@ class NotesRepository (application: Application) : CoroutineScope {
 //        }
 //    }
 
-    fun setNotes(note: Note) {
-        launch  { setNoteBG(note) }
+    fun setNotes(fastNote: FastNote) {
+        launch  { setNoteBG(fastNote) }
     }
 
-    private suspend fun setNoteBG(note: Note){
+    private suspend fun setNoteBG(fastNote: FastNote){
         withContext(Dispatchers.IO){
-            notesDao?.setNotes(note)
+            notesDao?.setNotes(fastNote)
         }
     }
 

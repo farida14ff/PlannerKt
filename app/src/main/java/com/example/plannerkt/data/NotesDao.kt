@@ -2,13 +2,13 @@ package com.example.plannerkt.data
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.example.plannerkt.models.Note
+import com.example.plannerkt.models.FastNote
 
 @Dao
 interface NotesDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun setNotes(note: Note)
+    fun setNotes(fastNote: FastNote)
 
 //    @Update
 //    fun updateNote(note: Note)
@@ -18,11 +18,11 @@ interface NotesDao {
 
 
     @Query("SELECT * FROM notes WHERE id = :id")
-    fun getNoteById(id: Int): Note?
+    fun getNoteById(id: Int): FastNote?
 
 
     @Query("SELECT * from notes ORDER BY id ASC")
-    fun getNotes() : LiveData<List<Note>>
+    fun getNotes() : LiveData<List<FastNote>>
 
 
     @Query("DELETE FROM notes WHERE id = :id")
@@ -30,7 +30,7 @@ interface NotesDao {
 
 
     @Delete
-    fun deleteAllItems(note: List<Note?>?)
+    fun deleteAllItems(fastNote: List<FastNote?>?)
 
 
 //    @Query("UPDATE notes SET basket_counter_menu = :num WHERE id = :id")
