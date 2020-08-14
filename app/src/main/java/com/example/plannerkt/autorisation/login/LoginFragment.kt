@@ -21,14 +21,18 @@ import com.example.plannerkt.autorisation.registration.RegistrationFragment
 import com.example.plannerkt.listeners.NavigationHost
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_login.view.*
+import java.lang.ref.Reference
 
 
 class LoginFragment : Fragment() {
 
     private lateinit var auth: FirebaseAuth
+    private lateinit var databaseReference: DatabaseReference
     var sharedPreferences: SharedPreferences? = null
     var editor: Editor? = null
 
@@ -66,6 +70,8 @@ class LoginFragment : Fragment() {
             } else {
                 view.password_edit_text.error = null
                 val user = Firebase.auth.currentUser
+//                val reference = databaseReference.database.getReference("Users").child(user!!.uid)
+//                reference.addsnapshotListener
 
                 if (user != null) {
                     startActivity(Intent(context, MainActivity::class.java))

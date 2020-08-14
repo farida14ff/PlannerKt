@@ -7,6 +7,9 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+
+
+
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.example.plannerkt.autorisation.AutorisationActivity
@@ -18,7 +21,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), NavigationHost {
 
-    private val fragmentManager: FragmentManager = supportFragmentManager
+    private val fragmentManager: androidx.fragment.app.FragmentManager = supportFragmentManager
     private val notesSectionFragment: NotesSectionFragment = NotesSectionFragment()
     private val chatSectionFragment: ChatSectionFragment = ChatSectionFragment()
     private var sharedPreferences: SharedPreferences? = null

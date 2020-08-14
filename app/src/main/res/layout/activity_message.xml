@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:orientation="vertical"
+    tools:context=".section_chat.chats.MessageActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+
+            <ImageView
+                android:id="@+id/close_icon"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginStart="21dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.516"
+                app:srcCompat="@drawable/ic_go_back">
+
+            </ImageView>
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="49dp"
+                android:layout_height="49dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:contentDescription="@string/profile_photo"
+                android:src="@drawable/ic_avatar_1p"
+                app:layout_constraintStart_toEndOf="@id/close_icon"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="55dp"
+                android:layout_height="38dp"
+                android:layout_marginStart="4dp"
+                android:contentDescription="@string/profile_photo"
+                app:layout_constraintBottom_toBottomOf="@+id/profileImage2"
+                app:layout_constraintEnd_toEndOf="@+id/profileImage2"
+                app:layout_constraintHorizontal_bias="0.8"
+                android:layout_marginTop="3dp"
+                app:layout_constraintStart_toEndOf="@id/close_icon"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_account_circle" />
+
+
+            <TextView
+                android:id="@+id/user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="11dp"
+                android:textColor="#000000"
+                android:textStyle="normal"
+                app:layout_constraintStart_toEndOf="@+id/profileImage2"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Leyla" />
+
+            <TextView
+                android:id="@+id/online_status"
+                android:layout_width="230dp"
+                android:layout_height="21dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:textColor="#000000"
+                android:textSize="10sp"
+                app:layout_constraintStart_toEndOf="@+id/profileImage2"
+                app:layout_constraintTop_toBottomOf="@+id/user_name"
+                tools:ignore="SmallSp"
+                tools:text="online" />
+
+            <!--            <androidx.appcompat.widget.Toolbar-->
+<!--                android:id="@+id/detail_app_bar"-->
+<!--                android:layout_width="144dp"-->
+<!--                android:layout_height="55dp"-->
+<!--                android:layout_marginStart="20dp"-->
+<!--                app:layout_constraintStart_toEndOf="@+id/imageView"-->
+<!--                app:title="@string/title_chat"-->
+<!--                app:titleTextAppearance="@style/ToolbarTheme"-->
+<!--                app:titleTextColor="@color/colorAccent"-->
+<!--                tools:layout_editor_absoluteY="0dp"-->
+<!--                android:addStatesFromChildren="false"-->
+<!--                tools:ignore="MissingConstraints">-->
+
+<!--            </androidx.appcompat.widget.Toolbar>-->
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ProgressBar
+        android:id="@+id/progressBarMessages"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        android:indeterminateTint="@color/rippleColor"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+
+<!--    <LinearLayout-->
+<!--        android:id="@+id/empty_view"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:layout_weight="1"-->
+<!--        android:orientation="vertical"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:gravity="center"-->
+<!--        android:visibility="gone">-->
+
+<!--        <ImageView-->
+<!--            android:id="@+id/imageView7"-->
+<!--            android:layout_width="35dp"-->
+<!--            android:layout_height="35dp"-->
+<!--            app:srcCompat="@drawable/ic_empty" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/textView7"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:text="@string/no_messages_available"/>-->
+
+
+<!--    </LinearLayout>-->
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout_message"
+        android:layout_width="wrap_content"
+        android:layout_weight="1"
+        android:layout_height="0dp">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_messages"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="bottom"
+        android:padding="16dp"
+        >
+
+        <EditText
+            android:id="@+id/edit_text"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:paddingStart="29dp"
+            android:background="@drawable/bg"
+            android:layout_marginStart="2dp"
+            android:hint="Сообщение"
+            android:layout_marginEnd="6dp"
+            android:cursorVisible="true"
+            android:textCursorDrawable="@null"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:paddingEnd="29dp"
+            android:maxHeight="350dp"
+            android:inputType="textCapSentences|textMultiLine"
+            />
+
+
+        <ImageButton
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="@drawable/send_button"
+            app:srcCompat="@drawable/ic_send"
+            android:onClick="onClickSendMesssage"
+            >
+
+        </ImageButton>
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

@@ -6,6 +6,7 @@ import java.util.*
 
 
 class Note() : Serializable {
+    val id: Long = 0
     val text: String = ""
 
     @ServerTimestamp

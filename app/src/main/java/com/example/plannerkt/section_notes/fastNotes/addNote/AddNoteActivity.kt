@@ -90,7 +90,6 @@ class AddNoteActivity : AppCompatActivity() {
                 if (!editableStatus) {
                     this.notesViewModel?.setNotes(note)
                     Log.e("editableStatus addnote", "false")
-
                 }
                 else {
                     this.notesViewModel?.updateNote(note.body,note.id)

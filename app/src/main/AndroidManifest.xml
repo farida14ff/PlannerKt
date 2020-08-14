@@ -17,7 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:targetApi="n">
-        <activity android:name=".section_notes.monthNotes.addMonthNote.AddMonthNoteActivity"></activity>
+        <activity android:name=".section_chat.chats.AddChatActivity" />
+        <activity android:name=".section_chat.chats.MessageActivity" />
+        <activity android:name=".section_notes.monthNotes.addMonthNote.AddMonthNoteActivity" />
         <activity android:name=".section_notes.fastNotes.addNote.AddNoteActivity" />
         <activity android:name=".BaseActivity" />
         <activity android:name=".section_notes.daysNotes.addDayNote.AddDayNoteActivity" />

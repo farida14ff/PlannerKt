@@ -40,10 +40,64 @@
 
                 </androidx.appcompat.widget.Toolbar>
 
+                <LinearLayout
+                    android:id="@+id/more"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="MissingConstraints">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/ic_trash"
+                            tools:ignore="MissingConstraints">
+
+                        </ImageView>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabsChat"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/app_bar"
+                app:tabIndicatorColor="@color/colorPrimaryBackgroundLight"
+                app:tabIndicatorHeight="2dp"
+                app:tabTextAppearance="@style/TabLayoutTheme"
+                app:tabTextColor="@color/bottom_nav_icons">
+
+            </com.google.android.material.tabs.TabLayout>
 
         </LinearLayout>
 
 
     </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPagerChat"
+        android:layout_width="match_parent"
+        android:layout_height="630dp"
+        android:background="@color/colorWhite"
+        android:layout_marginStart="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/app_bar">
+
+    </androidx.viewpager.widget.ViewPager>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

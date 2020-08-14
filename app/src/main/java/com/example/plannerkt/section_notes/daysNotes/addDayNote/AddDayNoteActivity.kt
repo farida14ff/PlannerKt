@@ -23,10 +23,9 @@ import kotlinx.android.synthetic.main.activity_add_note.*
 class AddDayNoteActivity : AppCompatActivity() {
     private var sharedPreferences: SharedPreferences? = null
     var editableStatus: Boolean = false
-    var notesId: Int = 0
+    var notesbody: String = "defVal"
     val db = Firebase.firestore
-
-
+    val defVal: String = "defVal"
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,7 +34,10 @@ class AddDayNoteActivity : AppCompatActivity() {
         sharedPreferences =getSharedPreferences("myPreferences", Context.MODE_PRIVATE)
 
         editableStatus = sharedPreferences!!.getBoolean("editableStatus",false)
-        notesId = sharedPreferences!!.getInt("notesId",0)
+//        notesId = sharedPreferences!!.getInt("notesId",0)
+        notesbody = sharedPreferences!!.getString("notesPosition",defVal)!!
+        Log.e("notesPosition getter ",notesbody.toString())
+
 
         initViews()
     }
@@ -43,6 +45,9 @@ class AddDayNoteActivity : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     @RequiresApi(Build.VERSION_CODES.O)
     private fun initViews() {
+
+        val sb = StringBuilder()
+
         val noteEditText = findViewById<EditText>(R.id.note_edit_text)
         noteEditText.requestFocus()
         noteEditText.addTextChangedListener(object : TextWatcher {
@@ -52,6 +57,12 @@ class AddDayNoteActivity : AppCompatActivity() {
                 i1: Int,
                 i2: Int
             ) {
+                if(sb.length ==1)
+                {
+
+                    sb.deleteCharAt(0);
+
+                }
             }
 
             override fun onTextChanged(
@@ -60,6 +71,12 @@ class AddDayNoteActivity : AppCompatActivity() {
                 i1: Int,
                 i2: Int
             ) {
+                if (sb.isEmpty() && noteEditText.length() == 1) {
+                    sb.append(charSequence)
+                    noteEditText.clearFocus()
+                    noteEditText.requestFocus()
+                    noteEditText.isCursorVisible = true
+                }
                 if (noteEditText.text.isNotEmpty()) {
                     note_ready_LL.visibility = View.VISIBLE
 
@@ -69,14 +86,20 @@ class AddDayNoteActivity : AppCompatActivity() {
                 }
             }
 
-            override fun afterTextChanged(editable: Editable) {}
+            override fun afterTextChanged(editable: Editable) {
+                if(sb.isEmpty())
+                {
+
+                    noteEditText.requestFocus();
+                }
+            }
         })
 
 //        val note: Note = db.toBasketDao().getItem(b.getMealId())
 
 
-        if (editableStatus) {
-
+        if (notesbody != defVal) {
+            noteEditText.setText(notesbody)
         }
 
         val goBackBtn = findViewById<ImageView>(R.id.go_back_icon)

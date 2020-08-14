@@ -1,6 +1,8 @@
 package com.example.plannerkt.adapters
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.content.SharedPreferences
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -24,6 +26,9 @@ class DayAndMonthNotesAdapter(
     private var lastChecked: CheckBox? = null
     private var lastCheckedPos = 0
     var itemsToDelete: ArrayList<Note> = ArrayList()
+    lateinit var note: Note
+//    var editor: SharedPreferences.Editor? = null
+
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DayAndMonthNotesViewHolder {
@@ -37,6 +42,8 @@ class DayAndMonthNotesAdapter(
     }
 
     override fun onBindViewHolder(holder: DayAndMonthNotesViewHolder, position: Int) {
+
+
         holder.bind(items!![position], onItemClickListener, onItemLongClickListener)
         holder.checkBox.isChecked = items[position].isSelected
         holder.checkBox.tag = position
@@ -70,21 +77,30 @@ class DayAndMonthNotesAdapter(
     inner class DayAndMonthNotesViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         private val note_body = view.notes_body
-        val checkBox = view.checker
+        val checkBox = view.checker!!
+        private val sharedPreference =  view.context.getSharedPreferences("myPreferences", Context.MODE_PRIVATE)
+        private var editor = sharedPreference.edit()
 
         @SuppressLint("LongLogTag", "UseValueOf")
         fun bind(
-            note: Note,
+            note2: Note,
             onItemClickListener: OnItemClickListener,
             onItemLongClickListener: OnItemLongClickListener
         ) {
-
             itemView.setOnClickListener {
-                onItemClickListener.onItemClick(note)
+                onItemClickListener.onItemClick(note2)
+                editor?.putString("notesPosition",items!![position].text)?.commit()
 
-
+                Log.e("notesPosition setter",items!![position].text)
             }
-            note_body.text = note.text
+
+            note = note2
+            val noteId = note.id
+
+
+
+
+            note_body.text = note2.text
 
 
         }

@@ -1,6 +1,7 @@
 package com.example.plannerkt.section_notes.daysNotes
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -30,6 +31,8 @@ class DaysNotesFragment : Fragment() {
     var editor: SharedPreferences.Editor? = null
     private val db = Firebase.firestore
     private val dayNotesList= ArrayList<Note>()
+    private var sharedPreferences: SharedPreferences? = null
+    var notesId: Long = 0
 
 
 
@@ -42,6 +45,12 @@ class DaysNotesFragment : Fragment() {
         initViews(view)
         initList(view)
         getFbNotes()
+
+        sharedPreferences = activity?.getSharedPreferences("myPreferences", Context.MODE_PRIVATE)
+
+//        notesId = sharedPreferences!!.getLong("mNoteId",0)
+//        Log.e("notesId getter",notesId.toString())
+
         return view
     }
 

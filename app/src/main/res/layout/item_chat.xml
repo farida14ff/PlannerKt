@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/profileImage2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:contentDescription="@string/profile_photo"
+        android:src="@drawable/ic_avatar_1p"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/profileImage"
+        android:layout_width="72dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="4dp"
+        android:contentDescription="@string/profile_photo"
+        app:layout_constraintBottom_toBottomOf="@+id/profileImage2"
+        app:layout_constraintEnd_toEndOf="@+id/profileImage2"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.578"
+        app:srcCompat="@drawable/ic_account_circle" />
+
+    <TextView
+        android:id="@+id/user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="11dp"
+        android:textColor="#000000"
+        android:textStyle="normal"
+        app:layout_constraintStart_toEndOf="@+id/profileImage2"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Leyla" />
+
+    <TextView
+        android:id="@+id/last_message_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        tools:text="12:31"
+        android:textColor="#000000"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SmallSp" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/image_view_message_counter"
+        android:layout_width="wrap_content"
+        android:layout_height="19dp"
+        android:layout_below="@+id/last_message_time"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/last_message_time"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:cardBackgroundColor="@color/colorDarkBlue"
+        app:cardCornerRadius="10dp"
+        android:visibility="gone"
+        >
+
+
+        <RelativeLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            >
+
+            <TextView
+                android:paddingStart="3dp"
+                android:paddingEnd="3dp"
+                android:gravity="center"
+                android:paddingBottom="2dp"
+                android:id="@+id/text_view_message_counter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="4dp"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginTop="1dp"
+                tools:text="2"
+                android:textColor="@color/colorWhite"
+                android:textAlignment="center"
+                android:textSize="9sp"
+                tools:ignore="RtlHardcoded">
+
+            </TextView>
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/last_message_body"
+        android:layout_width="230dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:textColor="#000000"
+        android:textSize="10sp"
+        app:layout_constraintStart_toEndOf="@+id/profileImage2"
+        app:layout_constraintTop_toBottomOf="@+id/user_name"
+        tools:ignore="SmallSp"
+        tools:text="There are several ways to get icons into Figma, and they primarily dependFigma, and they primarily dependFigma, and they primarily dependFigma, and they primarily depend " />
+
+    <View
+        android:layout_width="331dp"
+        android:layout_height="1dp"
+        android:background="#c0c0c0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/profileImage2" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

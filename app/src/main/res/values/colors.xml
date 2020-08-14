@@ -9,6 +9,7 @@
 
     <color name="colorWhite">#ffffff</color>
     <color name="colorMain">#1565C0</color>
+    <color name="colorDarkBlue">#0D47A1</color>
     <color name="blackTextColor">#000000</color>
 
     <color name="note">#e7dfdf</color>
@@ -18,4 +19,8 @@
 
     <!--    <color name="rippleColor">#420D91</color>-->
     <color name="textColorPrimary">#928C8C</color>
+
+    <color name="colorLeftMessage">#90CAF9</color>
+    <!--    <color name="colorLeftMessage">#B5B5CB</color>-->
+    <color name="colorRightMessage">#E3F2FD</color>
 </resources>
