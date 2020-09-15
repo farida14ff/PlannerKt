@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), NavigationHost {
 
-    private val fragmentManager: androidx.fragment.app.FragmentManager = supportFragmentManager
+    private val fragmentManager: FragmentManager = supportFragmentManager
     private val notesSectionFragment: NotesSectionFragment = NotesSectionFragment()
     private val chatSectionFragment: ChatSectionFragment = ChatSectionFragment()
     private var sharedPreferences: SharedPreferences? = null
@@ -31,6 +31,7 @@ class MainActivity : AppCompatActivity(), NavigationHost {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
 
         sharedPreferences = applicationContext
             .getSharedPreferences("myPreferences", Context.MODE_PRIVATE)

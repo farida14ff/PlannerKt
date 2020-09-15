@@ -59,6 +59,7 @@ class LoginFragment : Fragment() {
     private fun initViews(view: View) {
         auth = Firebase.auth
 
+
         view.next_button.backgroundTintList =
             ContextCompat.getColorStateList(activity!!.applicationContext, R.color.colorMain);
 
@@ -69,25 +70,31 @@ class LoginFragment : Fragment() {
 
             } else {
                 view.password_edit_text.error = null
-                val user = Firebase.auth.currentUser
-//                val reference = databaseReference.database.getReference("Users").child(user!!.uid)
-//                reference.addsnapshotListener
+                loginUser(
+                    email_edit_text.text.toString(),
+                    password_edit_text.text.toString()
+                )
 
-                if (user != null) {
-                    startActivity(Intent(context, MainActivity::class.java))
-                    activity?.finish()
-                    editor?.putBoolean("login", true)?.commit()
-
-                    Log.e("login user", "Successful")
-
-                } else {
-                    editor?.putBoolean("login", false)?.commit()
-                    view.password_text_input.error = getString(R.string.login_error)
-                    Log.e("login user", "failure")
-
-
-                }
-//                (activity as NavigationHost).navigateTo(, false) // Navigate to the next Fragment
+//                val user = Firebase.auth.currentUser
+////                val reference = databaseReference.database.getReference("Users").child(user!!.uid)
+////                reference.addsnapshotListener
+//
+//                if (user != null) {
+//                    startActivity(Intent(context, MainActivity::class.java))
+//                    activity?.finish()
+//                    editor?.putBoolean("login", true)?.commit()
+//                    Log.e("Login", "login")
+//
+//                    Log.e("login user", "Successful")
+//
+//                } else {
+//                    editor?.putBoolean("login", false)?.commit()
+//                    view.password_text_input.error = getString(R.string.login_error)
+//                    Log.e("login user", "failure")
+//
+//
+//                }
+////                (activity as NavigationHost).navigateTo(, false) // Navigate to the next Fragment
             }
         }
 
@@ -106,6 +113,25 @@ class LoginFragment : Fragment() {
 
         }
 
+    }
+
+    private fun loginUser(email: String, password: String) {
+        auth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
+            run {
+                if (task.isSuccessful) {
+                    editor?.putBoolean("login", true)?.commit()
+                    startActivity(Intent(context, MainActivity::class.java))
+                    activity?.finish()
+
+                    Log.e("login user", "Successful")
+
+                } else {
+                    editor?.putBoolean("login", false)?.commit()
+                    view?.password_text_input?.error = getString(R.string.login_error)
+                    Log.e("login user", "failure")
+                }
+            }
+        }
     }
 
     private fun isPasswordValid(text: Editable?): Boolean {

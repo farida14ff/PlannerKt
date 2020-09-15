@@ -1,19 +1,31 @@
 package com.example.plannerkt.section_notes
 
+import android.annotation.SuppressLint
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.plannerkt.MainActivity
 import com.example.plannerkt.R
 import com.example.plannerkt.adapters.FixedTabsPagerAdapter
 import com.example.plannerkt.section_notes.daysNotes.DaysNotesFragment
 import com.example.plannerkt.section_notes.fastNotes.FastNotesFragment
 import com.example.plannerkt.section_notes.monthNotes.MonthNotesFragment
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.fragment_notes_section.view.*
 
 
 class NotesSectionFragment : Fragment() {
+
+
+    var editor: SharedPreferences.Editor? = null
+    var sharedPreferences: SharedPreferences? = null
 
 
     override fun onCreateView(
@@ -24,6 +36,14 @@ class NotesSectionFragment : Fragment() {
         val root: View =  inflater.inflate(R.layout.fragment_notes_section, container, false)
 
         initTabLayout(root)
+        initSharedPref()
+
+        root.ic_logout.setOnClickListener {
+            Firebase.auth.signOut()
+            editor?.putBoolean("login",false)?.commit()
+            startActivity(Intent(context, MainActivity::class.java))
+            activity?.finish()
+        }
 
 
         return root
@@ -57,5 +77,16 @@ class NotesSectionFragment : Fragment() {
         const val DAY_NOTES_TITLE = "DAY"
         const val MONTH_NOTES_TITLE = "MONTH"
     }
+
+
+    @SuppressLint("CommitPrefEdits")
+    private fun initSharedPref() {
+        sharedPreferences = activity?.getSharedPreferences(
+            "myPreferences",
+            Context.MODE_PRIVATE
+        )
+        editor = sharedPreferences?.edit()
+    }
+
 
 }

@@ -18,6 +18,8 @@ class NotesRepository (application: Application) : CoroutineScope {
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main
 
+
+
     private var notesDao: NotesDao?
 
     init {
