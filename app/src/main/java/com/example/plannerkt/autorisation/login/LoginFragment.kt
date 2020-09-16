@@ -75,26 +75,6 @@ class LoginFragment : Fragment() {
                     password_edit_text.text.toString()
                 )
 
-//                val user = Firebase.auth.currentUser
-////                val reference = databaseReference.database.getReference("Users").child(user!!.uid)
-////                reference.addsnapshotListener
-//
-//                if (user != null) {
-//                    startActivity(Intent(context, MainActivity::class.java))
-//                    activity?.finish()
-//                    editor?.putBoolean("login", true)?.commit()
-//                    Log.e("Login", "login")
-//
-//                    Log.e("login user", "Successful")
-//
-//                } else {
-//                    editor?.putBoolean("login", false)?.commit()
-//                    view.password_text_input.error = getString(R.string.login_error)
-//                    Log.e("login user", "failure")
-//
-//
-//                }
-////                (activity as NavigationHost).navigateTo(, false) // Navigate to the next Fragment
             }
         }
 

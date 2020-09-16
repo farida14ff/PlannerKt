@@ -15,4 +15,5 @@
     <string name="title_sots">Social</string>
     <string name="add_note_title">Add note</string>
     <string name="profile_photo">Profilephoto</string>
+    <string name="logout">Logout</string>
 </resources>

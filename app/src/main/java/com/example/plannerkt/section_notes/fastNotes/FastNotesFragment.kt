@@ -82,35 +82,7 @@ class FastNotesFragment : Fragment() {
                 AddNoteActivity::class.java))
 
         }
-    }
 
-    private fun getFbNotes() {
-
-//        db.collection("fastNotes")
-//            .addSnapshotListener { snapshots: QuerySnapshot?, _: FirebaseFirestoreException? ->
-//                try {
-//
-//                    for (change in snapshots!!.documentChanges) {
-//                        when (change.type) {
-//                            DocumentChange.Type.ADDED -> {
-//                                val fastNote: FastNote =
-//                                    change.document.toObject(FastNote::class.java)
-//                                fastNoteList.add(0, fastNote)
-//
-//                            }
-//                            DocumentChange.Type.REMOVED -> {
-//                            }
-//                            DocumentChange.Type.MODIFIED -> {
-//                            }
-//                        }
-//                    }
-//                } catch (ex: NullPointerException) {
-//                    Log.e("npExp", "getFbNotes")
-//                }
-//                adapter.notifyDataSetChanged()
-//
-//
-//            }
     }
 
 
@@ -120,12 +92,12 @@ class FastNotesFragment : Fragment() {
             OnItemClickListener {
             override fun <T> onItemClick(listItem: T) {
                 editor?.putBoolean("editableStatus",true)?.commit()
-                if ((listItem as FastNote) != null) {
-//                    editor?.putInt("notesId",fastNote.id)?.commit()
-                }
-
-                startActivity(Intent(context,
-                    AddNoteActivity::class.java))
+//                if ((listItem as FastNote) != null) {
+////                    editor?.putInt("notesId",fastNote.id)?.commit()
+//                }
+//
+//                startActivity(Intent(context,
+//                    AddNoteActivity::class.java))
 
             }
 

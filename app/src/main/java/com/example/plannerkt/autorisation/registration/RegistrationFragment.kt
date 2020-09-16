@@ -141,6 +141,7 @@ class RegistrationFragment : Fragment() {
                                     Log.e("Registr", "login")
                                     startActivity(Intent(context, MainActivity::class.java))
                                     activity?.finish()
+//                                    val token = Firebase.auth.currentUser?.getIdToken()
 
                                 }
                         }

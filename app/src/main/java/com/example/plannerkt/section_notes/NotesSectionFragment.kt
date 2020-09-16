@@ -1,6 +1,7 @@
 package com.example.plannerkt.section_notes
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -39,10 +40,24 @@ class NotesSectionFragment : Fragment() {
         initSharedPref()
 
         root.ic_logout.setOnClickListener {
-            Firebase.auth.signOut()
-            editor?.putBoolean("login",false)?.commit()
-            startActivity(Intent(context, MainActivity::class.java))
-            activity?.finish()
+
+            val builder = AlertDialog.Builder(requireContext(),R.style.AlertDialogTheme)
+            builder.setTitle("Logout")
+            builder.setMessage("Are you sure you want logout?")
+            builder.setPositiveButton(R.string.logout) { _, _ ->
+                Firebase.auth.signOut()
+                editor?.putBoolean("login",false)?.commit()
+                startActivity(Intent(context, MainActivity::class.java))
+                activity?.finish()
+            }
+
+            builder.setNegativeButton(android.R.string.no) { _, _ ->
+                null
+            }
+
+
+            builder.show()
+
         }
 
 
