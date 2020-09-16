@@ -90,6 +90,7 @@ class DayAndMonthNotesAdapter(
             itemView.setOnClickListener {
                 onItemClickListener.onItemClick(note2)
                 editor?.putString("notesPosition",items!![position].text)?.commit()
+//                editor?.putString("notesPosition","defVal")?.commit()
 
                 Log.e("notesPosition setter",items!![position].text)
             }

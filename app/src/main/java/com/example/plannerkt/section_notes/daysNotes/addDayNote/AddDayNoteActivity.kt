@@ -31,12 +31,13 @@ class AddDayNoteActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_note)
-        sharedPreferences =getSharedPreferences("myPreferences", Context.MODE_PRIVATE)
+        sharedPreferences = getSharedPreferences("myPreferences", Context.MODE_PRIVATE)
 
         editableStatus = sharedPreferences!!.getBoolean("editableStatus",false)
 //        notesId = sharedPreferences!!.getInt("notesId",0)
         notesbody = sharedPreferences!!.getString("notesPosition",defVal)!!
         Log.e("notesPosition getter ",notesbody.toString())
+        Log.e("editableStatus",editableStatus.toString())
 
 
         initViews()

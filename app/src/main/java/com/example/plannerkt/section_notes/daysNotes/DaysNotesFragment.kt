@@ -42,6 +42,7 @@ class DaysNotesFragment : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_days_notes, container, false)
         setHasOptionsMenu(true);
+        initSharedPref()
         initViews(view)
         initList(view)
         getFbNotes()
@@ -52,6 +53,14 @@ class DaysNotesFragment : Fragment() {
 //        Log.e("notesId getter",notesId.toString())
 
         return view
+    }
+    @SuppressLint("CommitPrefEdits")
+    private fun initSharedPref() {
+        sharedPreferences = activity?.getSharedPreferences(
+            "myPreferences",
+            Context.MODE_PRIVATE
+        )
+        editor = sharedPreferences?.edit()
     }
 
     private fun getFbNotes() {
@@ -88,12 +97,14 @@ class DaysNotesFragment : Fragment() {
     }
 
 
-    @SuppressLint("ClickableViewAccessibility")
+    @SuppressLint("ClickableViewAccessibility", "LongLogTag")
     private fun initViews(view: View) {
         deleteNoteBtn = view.findViewById(R.id.more)
 
         view.add_day_note_btn.setOnClickListener {
             editor?.putBoolean("editableStatus",false)?.commit()
+            editor?.putString("notesPosition","defVal")?.commit()
+            Log.e(" putString notesPosition","defVal")
             startActivity(Intent(context, AddDayNoteActivity::class.java))
 
         }
