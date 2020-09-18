@@ -1,6 +1,7 @@
 package com.example.plannerkt.section_notes.monthNotes
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -30,6 +31,8 @@ class MonthNotesFragment : Fragment() {
     var deleteNoteBtn: LinearLayout? = null
     var editor: SharedPreferences.Editor? = null
     private val db = Firebase.firestore
+    private var sharedPreferences: SharedPreferences? = null
+
 
 
     override fun onCreateView(
@@ -39,11 +42,21 @@ class MonthNotesFragment : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_month_notes, container, false)
         setHasOptionsMenu(true);
+        initSharedPref()
         initViews(view)
         initList(view)
         getFbMonthNotes()
 
         return view
+    }
+
+    @SuppressLint("CommitPrefEdits")
+    private fun initSharedPref() {
+        sharedPreferences = activity?.getSharedPreferences(
+            "myPreferences",
+            Context.MODE_PRIVATE
+        )
+        editor = sharedPreferences?.edit()
     }
 
     private fun getFbMonthNotes() {
