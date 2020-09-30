@@ -2,7 +2,6 @@ package com.example.plannerkt.adapters
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.SharedPreferences
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -10,8 +9,8 @@ import android.view.ViewGroup
 import android.widget.CheckBox
 import androidx.recyclerview.widget.RecyclerView
 import com.example.plannerkt.R
-import com.example.plannerkt.listeners.OnItemClickListener
-import com.example.plannerkt.listeners.OnItemLongClickListener
+import com.example.plannerkt.halpers.OnItemClickListener
+import com.example.plannerkt.halpers.OnItemLongClickListener
 import com.example.plannerkt.models.Note
 import kotlinx.android.synthetic.main.item_notes.view.*
 import java.util.*

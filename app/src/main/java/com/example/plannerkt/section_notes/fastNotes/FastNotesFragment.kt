@@ -14,8 +14,8 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.plannerkt.R
 import com.example.plannerkt.adapters.NotesAdapter
-import com.example.plannerkt.listeners.OnItemClickListener
-import com.example.plannerkt.listeners.OnItemLongClickListener
+import com.example.plannerkt.halpers.OnItemClickListener
+import com.example.plannerkt.halpers.OnItemLongClickListener
 import com.example.plannerkt.models.FastNote
 import com.example.plannerkt.section_notes.fastNotes.addNote.AddNoteActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton

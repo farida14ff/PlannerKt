@@ -11,22 +11,17 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.plannerkt.MainActivity
 import com.example.plannerkt.R
 import com.example.plannerkt.autorisation.registration.RegistrationFragment
-import com.example.plannerkt.listeners.NavigationHost
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_login.view.*
-import java.lang.ref.Reference
 
 
 class LoginFragment : Fragment() {

@@ -3,13 +3,15 @@ package com.example.plannerkt.section_notes
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import com.example.plannerkt.MainActivity
 import com.example.plannerkt.R
@@ -41,12 +43,12 @@ class NotesSectionFragment : Fragment() {
 
         root.ic_logout.setOnClickListener {
 
-            val builder = AlertDialog.Builder(requireContext(),R.style.AlertDialogTheme)
+            val builder = AlertDialog.Builder(requireContext(), R.style.AlertDialogTheme)
             builder.setTitle("Logout")
             builder.setMessage("Are you sure you want logout?")
             builder.setPositiveButton(R.string.logout) { _, _ ->
                 Firebase.auth.signOut()
-                editor?.putBoolean("login",false)?.commit()
+                editor?.putBoolean("login", false)?.commit()
                 startActivity(Intent(context, MainActivity::class.java))
                 activity?.finish()
             }
@@ -55,8 +57,11 @@ class NotesSectionFragment : Fragment() {
                 null
             }
 
+            val alert = builder.create()
+            alert.show()
 
-            builder.show()
+            val nbutton= alert.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(Color.BLUE)
+            val pbutton = alert.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(Color.BLUE)
 
         }
 
@@ -74,7 +79,7 @@ class NotesSectionFragment : Fragment() {
         val monthNotesFragment = MonthNotesFragment()
 
         val adapter = FixedTabsPagerAdapter(childFragmentManager)
-        adapter.addFragment(fastNotesFragment,FAST_NOTES_TITLE)
+        adapter.addFragment(fastNotesFragment, FAST_NOTES_TITLE)
         adapter.addFragment(daysNotesFragment, DAY_NOTES_TITLE)
         adapter.addFragment(monthNotesFragment, MONTH_NOTES_TITLE)
         viewPager.adapter = adapter

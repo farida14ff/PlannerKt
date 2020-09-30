@@ -22,7 +22,7 @@ import kotlinx.android.synthetic.main.activity_add_note.*
 
 class AddDayNoteActivity : AppCompatActivity() {
     private var sharedPreferences: SharedPreferences? = null
-    var editableStatus: Boolean = false
+//    var editableStatus: Boolean = false
     var notesbody: String = "defVal"
     val db = Firebase.firestore
     val defVal: String = "defVal"
@@ -33,11 +33,11 @@ class AddDayNoteActivity : AppCompatActivity() {
         setContentView(R.layout.activity_add_note)
         sharedPreferences = getSharedPreferences("myPreferences", Context.MODE_PRIVATE)
 
-        editableStatus = sharedPreferences!!.getBoolean("editableStatus",false)
+//        editableStatus = sharedPreferences!!.getBoolean("editableStatus",false)
 //        notesId = sharedPreferences!!.getInt("notesId",0)
         notesbody = sharedPreferences!!.getString("notesPosition",defVal)!!
         Log.e("notesPosition getter ",notesbody.toString())
-        Log.e("editableStatus",editableStatus.toString())
+//        Log.e("editableStatus",editableStatus.toString())
 
 
         initViews()
@@ -107,17 +107,17 @@ class AddDayNoteActivity : AppCompatActivity() {
         goBackBtn.setOnClickListener {
             if(noteEditText?.text != null && noteEditText.text?.trim()?.length!! > 0){
 //                val note = Note(0, "", noteEditText.text.toString())
-                if (!editableStatus) {
+//                if (!editableStatus) {
                     setfbNote(noteEditText.text.toString())
-                    Log.e("editableStatus addnote", "false")
+//                    Log.e("editableStatus addnote", "false")
 
-                }
-                else {
-//                    notesViewModel?.updateNote(note.body,note.id)
-//                    notesViewModel?.updateNote(note)
-                    Log.e("editableStatus addnote", "true")
-
-                }
+//                }
+//                else {
+////                    notesViewModel?.updateNote(note.body,note.id)
+////                    notesViewModel?.updateNote(note)
+//                    Log.e("editableStatus addnote", "true")
+//
+//                }
             }
 
             finish()
@@ -127,18 +127,18 @@ class AddDayNoteActivity : AppCompatActivity() {
         val doneBtn = findViewById<LinearLayout>(R.id.note_ready_LL)
         doneBtn.setOnClickListener {
             if(noteEditText?.text != null && noteEditText.text?.trim()?.length!! > 0) {
-                if (!editableStatus) {
+//                if (!editableStatus) {
                     setfbNote(noteEditText.text.toString())
 
-                    Log.e("editableStatus addnote", "false")
+//                    Log.e("editableStatus addnote", "false")
 
-                }
-                else {
-//                    notesViewModel?.updateNote(note.body,note.id)
-//                    notesViewModel?.updateNote(note)
-                    Log.e("editableStatus addnote", "true")
-
-                }
+//                }
+//                else {
+////                    notesViewModel?.updateNote(note.body,note.id)
+////                    notesViewModel?.updateNote(note)
+//                    Log.e("editableStatus addnote", "true")
+//
+//                }
             }
             finish()
 

@@ -23,7 +23,7 @@ import kotlinx.android.synthetic.main.activity_add_note.*
 class AddMonthNoteActivity : AppCompatActivity() {
 
     private var sharedPreferences: SharedPreferences? = null
-    var editableStatus: Boolean = false
+//    var editableStatus: Boolean = false
     var notesId: Int = 0
     val db = Firebase.firestore
 
@@ -33,7 +33,7 @@ class AddMonthNoteActivity : AppCompatActivity() {
         setContentView(R.layout.activity_add_note)
         sharedPreferences =getSharedPreferences("myPreferences", Context.MODE_PRIVATE)
 
-        editableStatus = sharedPreferences!!.getBoolean("editableStatus",false)
+//        editableStatus = sharedPreferences!!.getBoolean("editableStatus",false)
         notesId = sharedPreferences!!.getInt("notesId",0)
 
         initViews()
@@ -74,24 +74,20 @@ class AddMonthNoteActivity : AppCompatActivity() {
 
 
 
-        if (editableStatus) {
-
-        }
-
         val goBackBtn = findViewById<ImageView>(R.id.go_back_icon)
         goBackBtn.setOnClickListener {
             if(noteEditText?.text != null && noteEditText.text?.trim()?.length!! > 0){
-                if (!editableStatus) {
+//                if (!editableStatus) {
                     setFbNote(noteEditText.text.toString())
-                    Log.e("editableStatus addnote", "false")
+//                    Log.e("editableStatus addnote", "false")
 
-                }
-                else {
+//                }
+//                else {
 //                    notesViewModel?.updateNote(note.body,note.id)
 //                    notesViewModel?.updateNote(note)
-                    Log.e("editableStatus addnote", "true")
+//                    Log.e("editableStatus addnote", "true")
 
-                }
+//                }
             }
 
             finish()
@@ -103,17 +99,17 @@ class AddMonthNoteActivity : AppCompatActivity() {
             if(noteEditText?.text != null && noteEditText.text?.trim()?.length!! > 0) {
 //                val note = Note(0, "", noteEditText.text.toString())
 
-                if (!editableStatus) {
+//                if (!editableStatus) {
                     setFbNote(noteEditText.text.toString())
-                    Log.e("editableStatus addnote", "false")
+//                    Log.e("editableStatus addnote", "false")
 
-                }
-                else {
+//                }
+//                else {
 //                    notesViewModel?.updateNote(note.body,note.id)
 //                    notesViewModel?.updateNote(note)
-                    Log.e("editableStatus addnote", "true")
+//                    Log.e("editableStatus addnote", "true")
 
-                }
+//                }
             }
             finish()
 

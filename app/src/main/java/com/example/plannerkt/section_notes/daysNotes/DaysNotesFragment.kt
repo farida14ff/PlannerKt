@@ -12,8 +12,8 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.plannerkt.R
 import com.example.plannerkt.adapters.DayAndMonthNotesAdapter
-import com.example.plannerkt.listeners.OnItemClickListener
-import com.example.plannerkt.listeners.OnItemLongClickListener
+import com.example.plannerkt.halpers.OnItemClickListener
+import com.example.plannerkt.halpers.OnItemLongClickListener
 import com.example.plannerkt.models.Note
 import com.example.plannerkt.section_notes.daysNotes.addDayNote.AddDayNoteActivity
 import com.google.firebase.firestore.DocumentChange
@@ -102,7 +102,7 @@ class DaysNotesFragment : Fragment() {
         deleteNoteBtn = view.findViewById(R.id.more)
 
         view.add_day_note_btn.setOnClickListener {
-            editor?.putBoolean("editableStatus",false)?.commit()
+//            editor?.putBoolean("editableStatus",false)?.commit()
             editor?.putString("notesPosition","defVal")?.commit()
             Log.e(" putString notesPosition","defVal")
             startActivity(Intent(context, AddDayNoteActivity::class.java))
@@ -115,8 +115,8 @@ class DaysNotesFragment : Fragment() {
         adapter = DayAndMonthNotesAdapter(dayNotesList, object :
             OnItemClickListener {
             override fun <T> onItemClick(listItem: T) {
-                editor?.putBoolean("editableStatus",true)?.commit()
-                startActivity(Intent(context, AddDayNoteActivity::class.java))
+//                editor?.putBoolean("editableStatus",true)?.commit()
+//                startActivity(Intent(context, AddDayNoteActivity::class.java))
 
             }
 

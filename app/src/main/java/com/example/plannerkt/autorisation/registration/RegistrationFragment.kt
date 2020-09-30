@@ -25,15 +25,12 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import kotlinx.android.synthetic.main.fragment_login.view.cancel_button
-import kotlinx.android.synthetic.main.fragment_login.view.email_edit_text
-import kotlinx.android.synthetic.main.fragment_login.view.next_button
-import kotlinx.android.synthetic.main.fragment_login.view.password_edit_text
 import kotlinx.android.synthetic.main.fragment_registration.*
 import kotlinx.android.synthetic.main.fragment_registration.view.*
 import java.util.*
 
 
+@Suppress("IMPLICIT_CAST_TO_ANY")
 class RegistrationFragment : Fragment() {
 
     private lateinit var auth: FirebaseAuth
@@ -97,13 +94,13 @@ class RegistrationFragment : Fragment() {
 
         })
         view.next_button.setOnClickListener {
+            Log.e("nextButton","clicked")
             if (!isPasswordValid(view.password_edit_text.text)) {
                 view.password_edit_text.error = getString(R.string.error_password)
 
             } else {
                 view.password_edit_text.error = null
                 if (view.password_edit_text.text.toString() == view.repeat_password_edit_text.text.toString()) {
-//                if(view.password_edit_text.text != view.repeat_password_edit_text.text){
                     finalPass = view.repeat_password_edit_text.text.toString()
                     registerNewUser(view.email_edit_text.text.toString(), finalPass)
                 } else {
@@ -124,7 +121,7 @@ class RegistrationFragment : Fragment() {
     }
 
     private fun registerNewUser(email: String, password: String) {
-
+        Log.e("register user ","launched")
         databaseReference = Firebase.database.getReference("Users")
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
@@ -156,6 +153,10 @@ class RegistrationFragment : Fragment() {
 //                        Log.e( TAG,"failure", task.exception)
 //
                     }
+//                    else {
+//                        Log.e("task",task.result.toString())
+//
+//                    }
                 }
             }
 

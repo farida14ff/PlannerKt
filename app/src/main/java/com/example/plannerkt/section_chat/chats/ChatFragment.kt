@@ -1,6 +1,5 @@
 package com.example.plannerkt.section_chat.chats
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,17 +10,13 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.plannerkt.R
 import com.example.plannerkt.adapters.ChatsAdapter
-import com.example.plannerkt.listeners.OnItemClickListener
+import com.example.plannerkt.halpers.OnItemClickListener
 import com.example.plannerkt.models.Chat
-import com.example.plannerkt.section_notes.daysNotes.addDayNote.AddDayNoteActivity
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.DocumentChange
-import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.fragment_chat.view.*
-import kotlinx.android.synthetic.main.fragment_days_notes.view.*
 
 class ChatFragment : Fragment() {
 

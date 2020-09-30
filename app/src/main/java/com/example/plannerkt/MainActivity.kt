@@ -14,7 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.example.plannerkt.autorisation.AutorisationActivity
 import com.example.plannerkt.section_chat.ChatSectionFragment
-import com.example.plannerkt.listeners.NavigationHost
+import com.example.plannerkt.halpers.NavigationHost
 import com.example.plannerkt.section_notes.NotesSectionFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*

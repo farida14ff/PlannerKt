@@ -12,8 +12,8 @@ import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.plannerkt.R
 import com.example.plannerkt.adapters.DayAndMonthNotesAdapter
-import com.example.plannerkt.listeners.OnItemClickListener
-import com.example.plannerkt.listeners.OnItemLongClickListener
+import com.example.plannerkt.halpers.OnItemClickListener
+import com.example.plannerkt.halpers.OnItemLongClickListener
 import com.example.plannerkt.models.Note
 import com.example.plannerkt.section_notes.monthNotes.addMonthNote.AddMonthNoteActivity
 import com.google.firebase.firestore.DocumentChange
@@ -108,7 +108,7 @@ class MonthNotesFragment : Fragment() {
 
         view.add_month_note_btn
             .setOnClickListener {
-            editor?.putBoolean("editableStatus", false)?.commit()
+//            editor?.putBoolean("editableStatus", false)?.commit()
             startActivity(Intent(context, AddMonthNoteActivity::class.java))
 
         }
@@ -119,12 +119,12 @@ class MonthNotesFragment : Fragment() {
         adapter = DayAndMonthNotesAdapter(monthNoteList, object :
             OnItemClickListener {
             override fun <T> onItemClick(listItem: T) {
-                editor?.putBoolean("editableStatus", true)?.commit()
+//                editor?.putBoolean("editableStatus", true)?.commit()
 //                if (note != null) {
 //                    editor?.putInt("notesId", note.id)?.commit()
 //                }
 
-                startActivity(Intent(context, AddMonthNoteActivity::class.java))
+//                startActivity(Intent(context, AddMonthNoteActivity::class.java))
 
             }
 

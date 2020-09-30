@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.plannerkt.R
-import com.example.plannerkt.listeners.OnItemClickListener
+import com.example.plannerkt.halpers.OnItemClickListener
 import com.example.plannerkt.models.Chat
 import kotlinx.android.synthetic.main.item_chat.view.*
 
